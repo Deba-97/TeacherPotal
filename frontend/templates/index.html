@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="login-container" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-chalkboard-teacher login-icon"></i>
+                <h1>Teacher Portal</h1>
+                <p>Manage your students with ease</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" placeholder="teacher@example.com">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                
+                <button id="login-btn" class="login-btn">
+                    <span id="login-btn-text">Login</span>
+                    <div id="login-spinner" class="spinner" style="display: none;"></div>
+                </button>
+                
+                <div id="login-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="portal-container" class="portal-container" style="display: none;">
+        <header class="portal-header">
+            <div class="header-left">
+                <h1><i class="fas fa-chalkboard"></i> Teacher Portal</h1>
+            </div>
+            <div class="header-right">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <main class="portal-main">
+            <div class="student-list-container">
+                <div class="list-header">
+                    <h2><i class="fas fa-user-graduate"></i> Student List</h2>
+                    <button id="add-student-btn" class="add-btn">
+                        <i class="fas fa-plus"></i> Add Student
+                    </button>
+                </div>
+
+                <div id="loading" class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading students...</p>
+                </div>
+
+                <div id="no-students" class="empty-state" style="display: none;">
+                    <i class="fas fa-user-slash"></i>
+                    <p>No students found</p>
+                    <button id="add-first-student" class="text-btn">Add your first student</button>
+                </div>
+
+                <div id="student-list-content" style="display: none;">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search students...">
+                    </div>
+
+                    <div class="table-container">
+                        <table id="student-table" class="student-table">
+                            <thead>
+                                <tr>
+                                    <th>Name <i class="fas fa-sort"></i></th>
+                                    <th>Subject <i class="fas fa-sort"></i></th>
+                                    <th>Marks <i class="fas fa-sort"></i></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="add-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-user-plus"></i> Add New Student</h2>
+                    <span id="close-modal" class="close">&times;</span>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="student-name"><i class="fas fa-user"></i> Name</label>
+                        <input type="text" id="student-name" placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="student-subject"><i class="fas fa-book"></i> Subject</label>
+                        <input type="text" id="student-subject" placeholder="Mathematics">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="student-marks"><i class="fas fa-star"></i> Marks</label>
+                        <input type="number" id="student-marks" placeholder="85" min="0" max="100">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button id="cancel-add-btn" class="cancel-btn">Cancel</button>
+                    <button id="submit-student-btn" class="submit-btn">
+                        <span>Add Student</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                    <div id="add-error" class="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
